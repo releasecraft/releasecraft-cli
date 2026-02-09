@@ -1,0 +1,99 @@
+name: Bug Report
+description: Report a bug or issue with ReleaseCraft CLI
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please fill out the form below to help us understand and fix the issue.
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Which version of ReleaseCraft are you using?
+      placeholder: "e.g., 0.5.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: Which operating system are you using?
+      options:
+        - Windows
+        - macOS
+        - Linux (Ubuntu)
+        - Linux (Other)
+        - Docker
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: dotnet-version
+    attributes:
+      label: .NET Version
+      description: Output of `dotnet --version`
+      placeholder: "e.g., 10.0.100"
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: The exact command you ran (remove sensitive tokens)
+      placeholder: |
+        releasecraft --owner microsoft --repo vscode --from-tag 1.84.0 --to-tag 1.85.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened? Include error messages, stack traces, or unexpected output.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the bug
+      placeholder: |
+        1. Install ReleaseCraft via `dotnet tool install --global ReleaseCraft.CLI`
+        2. Run command `releasecraft --owner ... --repo ...`
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other relevant information (screenshots, logs, etc.)
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I am using the latest version of ReleaseCraft
+          required: true
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+        - label: I have removed any sensitive information (tokens, credentials) from this report
+          required: true

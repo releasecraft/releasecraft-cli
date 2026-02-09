@@ -1,0 +1,90 @@
+name: Question / Support
+description: Ask a question or request help with ReleaseCraft
+title: "[Question]: "
+labels: ["question", "support"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Need help with ReleaseCraft? We're here to assist! Please provide as much detail as possible.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Question Category
+      description: What type of question is this?
+      options:
+        - Installation & Setup
+        - Usage & Configuration
+        - Authentication (GitHub tokens)
+        - Output Formats
+        - GitHub Action Integration
+        - NuGet Package Usage
+        - Error Messages
+        - API Documentation
+        - Best Practices
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What would you like to know?
+      placeholder: "How do I..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What are you trying to accomplish? What have you tried so far?
+      placeholder: |
+        Goal: Generate release notes for my private repository
+        Tried: Running with --token flag but getting 401 error
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command or Code
+      description: If applicable, share the command or code you're using (remove sensitive tokens)
+      render: shell
+      placeholder: |
+        releasecraft --owner myorg --repo myrepo --from-tag v1.0 --to-tag v2.0
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Which version of ReleaseCraft are you using?
+      placeholder: "e.g., 0.5.0"
+
+  - type: textarea
+    id: documentation
+    attributes:
+      label: Documentation Checked
+      description: Which documentation have you already reviewed?
+      placeholder: |
+        - [ ] README
+        - [ ] CLI Usage Guide
+        - [ ] Authentication Guide
+        - [ ] Examples
+        - [ ] NuGet Package Docs
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: Any other details that might be helpful
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues for similar questions
+          required: true
+        - label: I have reviewed the documentation
+          required: true

@@ -1,0 +1,26 @@
+# Build artifacts
+bin/
+obj/
+dist/
+
+# NuGet packages (kept in packages/ directory)
+*.nupkg.bak
+*.snupkg
+*.user
+*.suo
+*.log
+
+# IDE
+.vs/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
