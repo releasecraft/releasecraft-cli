@@ -73,7 +73,7 @@ Documentation PRs are welcome! You can improve:
 
 ## 🔒 Source Code Contributions
 
-Source code development happens in our **private** `releasecraft-core` repository to protect intellectual property and proprietary algorithms.
+Source code development happens in our private repository to protect intellectual property and proprietary algorithms.
 
 **If you're interested in contributing code:**
 - Email us at **nicolas@thal.dev**
@@ -91,7 +91,7 @@ This `releasecraft-cli` repository contains:
 - ✅ Release distributions
 
 This repository does **NOT** contain:
-- ❌ Source code (it's in the private `releasecraft-core` repo)
+- ❌ Source code (it's maintained in a private repository)
 - ❌ Build scripts
 - ❌ Internal development documentation
 

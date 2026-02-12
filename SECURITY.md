@@ -22,7 +22,7 @@ We take security vulnerabilities seriously. If you discover a security issue in 
 Instead, please report security issues via one of these methods:
 
 1. **GitHub Security Advisories (Preferred)**
-   - Go to [Security Advisories](https://github.com/releasecraft/releasecraft-core/security/advisories)
+  - Go to [Security Advisories](https://github.com/releasecraft/releasecraft-cli/security/advisories)
    - Click "Report a vulnerability"
    - Provide detailed information about the vulnerability
 
@@ -155,8 +155,8 @@ Security updates are released as:
 - **Immediate patches** for critical vulnerabilities
 
 Subscribe to:
-- [GitHub Security Advisories](https://github.com/releasecraft/releasecraft-core/security/advisories)
-- [Release notifications](https://github.com/releasecraft/releasecraft-core/releases)
+- [GitHub Security Advisories](https://github.com/releasecraft/releasecraft-cli/security/advisories)
+- [Release notifications](https://github.com/releasecraft/releasecraft-cli/releases)
 - [NuGet package updates](https://www.nuget.org/packages/ReleaseCraft/)
 
 ## Security Scanning
@@ -178,7 +178,7 @@ We appreciate security researchers who responsibly disclose vulnerabilities. Con
 ## Questions?
 
 For security-related questions that are not vulnerabilities:
-- Open a [GitHub Discussion](https://github.com/releasecraft/releasecraft-core/discussions)
+- Open a [GitHub Discussion](https://github.com/releasecraft/releasecraft-cli/discussions)
 - Email: security@releasecraft.io
 
 ---

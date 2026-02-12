@@ -58,5 +58,4 @@ MIT License - See LICENSE file for details
 
 ---
 
-**Version:** v0.5.3  
-**Built from:** [releasecraft-core](https://github.com/releasecraft/releasecraft-core) (private)
+**Version:** v0.5.3
