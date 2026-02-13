@@ -28,16 +28,134 @@ releasecraft --owner kubernetes --repo kubernetes --from-tag v1.28.0 --to-tag v1
 releasecraft --owner facebook --repo react --from-tag v18.0.0 --to-tag v18.2.0 --output notes.md
 ```
 
+## 🔌 Integration into Your Application
+
+**Embed ReleaseCraft directly into your .NET application** for programmatic release notes generation. Perfect for building custom tools, internal portals, admin dashboards, or SaaS features.
+
+### Installation for Integration
+
+```bash
+# Install the complete package (recommended)
+dotnet add package ReleaseCraft
+
+# Or install modular packages
+dotnet add package ReleaseCraft.Engine           # Core
+dotnet add package ReleaseCraft.Connectors.GitHub  # GitHub integration
+dotnet add package ReleaseCraft.Templates         # Output formats
+```
+
+### Quick Integration Example
+
+```csharp
+using ReleaseCraft.Connectors.GitHub;
+using ReleaseCraft.Templates;
+
+var githubOptions = new GitHubOptions
+{
+    ProductName = "MyApp",
+    Token = Environment.GetEnvironmentVariable("GITHUB_TOKEN") ?? string.Empty
+};
+
+var changeSource = new GitHubChangeSource(githubOptions);
+var generator = new MarkdownReleaseNotesGenerator(new MarkdownGeneratorOptions());
+
+var changes = await changeSource.GetMergedPullRequestsBetweenTagsAsync(
+    owner: "dotnet",
+    repo: "aspnetcore",
+    fromTag: "v8.0.0",
+    toTag: "v8.1.0",
+    ct: CancellationToken.None
+);
+
+var releaseNotes = generator.Generate(
+    changes,
+    version: "v8.1.0",
+    releaseDate: DateTimeOffset.UtcNow
+);
+
+Console.WriteLine(releaseNotes);
+```
+
+### Real-World Scenarios
+
+**1. ASP.NET Core API Endpoint**
+```csharp
+app.MapPost("/api/releases/generate", async (
+    [FromBody] GenerateRequest request,
+    [FromServices] GitHubChangeSource changeSource,
+    [FromServices] MarkdownReleaseNotesGenerator generator) =>
+{
+    var changes = await changeSource.GetMergedPullRequestsBetweenTagsAsync(
+        owner: request.Owner, repo: request.Repo,
+        fromTag: request.FromTag, toTag: request.ToTag, ct: default
+    );
+    return generator.Generate(changes, request.ToTag, DateTimeOffset.UtcNow);
+});
+```
+
+**2. Background Service for Automated Generation**
+```csharp
+public class ReleaseNotesService : BackgroundService
+{
+    protected override async Task ExecuteAsync(CancellationToken ct)
+    {
+        while (!ct.IsCancellationRequested)
+        {
+            await GenerateReleaseNotesForNewTags();
+            await Task.Delay(TimeSpan.FromHours(1), ct);
+        }
+    }
+}
+```
+
+**3. Blazor UI Component**
+```csharp
+@page "/releases/generate"
+@inject GitHubChangeSource ChangeSource
+@inject MarkdownReleaseNotesGenerator Generator
+
+<button @onclick="GenerateNotes">Generate Release Notes</button>
+
+@code {
+    private async Task GenerateNotes()
+    {
+        var changes = await ChangeSource.GetMergedPullRequestsBetweenTagsAsync(...);
+        var notes = Generator.Generate(changes, version, DateTimeOffset.UtcNow);
+    }
+}
+```
+
+📖 **[Full Integration Guide](docs/INTEGRATION.md)** - Detailed examples, DI setup, custom connectors, error handling, and best practices.
+
 ## 📦 NuGet Packages
 
-- **ReleaseCraft.Engine** - Core engine
-- **ReleaseCraft.Connectors.GitHub** - GitHub integration
-- **ReleaseCraft.Templates** - Output generators
-- **ReleaseCraft.CLI** - Command-line tool
+### Core Packages
+
+- **[ReleaseCraft](https://www.nuget.org/packages/ReleaseCraft)** - Complete package (recommended for integration)
+- **[ReleaseCraft.Engine](https://www.nuget.org/packages/ReleaseCraft.Engine)** - Core engine
+- **[ReleaseCraft.Connectors.GitHub](https://www.nuget.org/packages/ReleaseCraft.Connectors.GitHub)** - GitHub integration
+- **[ReleaseCraft.Templates](https://www.nuget.org/packages/ReleaseCraft.Templates)** - Output generators
+
+### Tools
+
+- **[ReleaseCraft.CLI](https://www.nuget.org/packages/ReleaseCraft.CLI)** - Command-line tool
+
+**Installation:**
+```bash
+# For CLI usage
+dotnet tool install --global ReleaseCraft.CLI
+
+# For app integration
+dotnet add package ReleaseCraft
+```
 
 ## 📖 Documentation
 
-Full documentation available at [releasecraft.io](https://releasecraft.io) (coming soon)
+- **[Integration Guide](docs/INTEGRATION.md)** - Embed ReleaseCraft in your .NET applications
+- **[CLI Usage](https://github.com/releasecraft/releasecraft-cli#-quick-start)** - Command-line examples
+- **[NuGet Packages](https://www.nuget.org/packages?q=ReleaseCraft)** - Available packages
+
+Full documentation available at [releasecraft.io](https://releasecraft.io)
 
 ## 🤝 Contributing
 
